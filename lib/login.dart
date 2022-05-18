@@ -34,20 +34,19 @@ class _LoginScreenState extends State<LoginScreen> {
             TextFormField(
               controller: emailTextbox,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 16,
                 color: Colors.black87,
-                fontWeight: FontWeight.w600,
               ),
               decoration: InputDecoration(
                 focusColor: Colors.white,
                 //add prefix icon
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
 
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 hintText: "jonh.doe@email.com",
                 //make hint text
@@ -74,27 +73,24 @@ class _LoginScreenState extends State<LoginScreen> {
               autocorrect: false,
               controller: passwordTextbox,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 16,
                 color: Colors.black87,
-                fontWeight: FontWeight.w600,
               ),
               decoration: InputDecoration(
                 focusColor: Colors.white,
                 //add prefix icon
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
-
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 ),
                 hintText: "********",
                 //make hint text
                 hintStyle: const TextStyle(
                   color: Colors.grey,
                   fontSize: 16,
-                  fontWeight: FontWeight.w400,
                 ),
                 //create lable
                 labelText: 'Type your password',
@@ -102,7 +98,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelStyle: const TextStyle(
                   color: Colors.black87,
                   fontSize: 16,
-                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
@@ -113,16 +108,16 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 60,
               child: Material(
                 color: Colors.black26,
-                borderRadius: const BorderRadius.all(Radius.circular(90.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 child: InkWell(
                   splashColor: Colors.black26,
-                  borderRadius: const BorderRadius.all(Radius.circular(90.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   onTap: () {},
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.black,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(90)),
+                          borderRadius: BorderRadius.circular(8)),
                     ),
                     onPressed: () {
                       if (emailTextbox.text.isEmpty &&
