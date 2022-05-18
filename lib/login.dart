@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/views/home.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -146,6 +147,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       } else {
                         print(passwordTextbox.text);
                         print(emailTextbox.text);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                            ));
                       }
                     },
                     child: const Text(
