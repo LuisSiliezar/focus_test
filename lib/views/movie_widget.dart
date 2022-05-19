@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:test_app/models/movie_model.dart';
 import 'package:test_app/views/details.dart';
 
 Widget movieWidget({
@@ -7,8 +9,9 @@ Widget movieWidget({
   required String imageURL,
   required String releaseDate,
   required String overview,
-  required int vote,
+  required String vote,
   required int id,
+  required Results movie,
 }) {
   return Padding(
       padding: const EdgeInsets.fromLTRB(20, 25, 20, 25),
@@ -17,7 +20,9 @@ Widget movieWidget({
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailsScreen(),
+                builder: (context) => DetailsScreen(
+                  movie: movie,
+                ),
               ));
         },
         child: Card(
@@ -77,22 +82,14 @@ Widget movieWidget({
                                   Icons.star,
                                   color: Colors.deepOrange,
                                 ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.deepOrange,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.deepOrange,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.deepOrange,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.deepOrange,
-                                ),
+                                Text(
+                                  vote,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1,
+                                      fontSize: 15,
+                                      color: Colors.black87),
+                                )
                               ],
                             ),
                             TextButton(
@@ -105,7 +102,8 @@ Widget movieWidget({
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => DetailsScreen(),
+                                      builder: (context) =>
+                                          DetailsScreen(movie: movie),
                                     ));
                               },
                               child: Text(
