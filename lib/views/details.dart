@@ -85,6 +85,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   //  IMAGE
                   Image.network(
                     "https://image.tmdb.org/t/p/w500/${widget.movie.posterPath}",
+                    errorBuilder: ((context, error, stackTrace) =>
+                        Image.network(
+                          "https://www.fabricocina.com/wp-content/uploads/2018/06/image_large.png",
+                          height: 800,
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                        )),
                     height: 800,
                     fit: BoxFit.contain,
                     width: double.infinity,
@@ -210,6 +218,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                             5),
                                                     child: Image.network(
                                                       "https://image.tmdb.org/t/p/w500/${relatedMovies[index].posterPath}",
+                                                      errorBuilder: ((context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          Image.network(
+                                                            "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
+                                                            height: 100,
+                                                            width: 100,
+                                                            fit: BoxFit.contain,
+                                                            alignment: Alignment
+                                                                .center,
+                                                          )),
                                                       height: 100,
                                                       width: 100,
                                                       fit: BoxFit.contain,

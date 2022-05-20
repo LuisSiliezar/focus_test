@@ -34,6 +34,14 @@ Widget movieWidget({
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Image.network(
+                    errorBuilder: ((context, error, stackTrace) =>
+                        Image.network(
+                          "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
+                          height: 500,
+                          fit: BoxFit.contain,
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                        )),
                     imageURL,
                     height: 500,
                     fit: BoxFit.contain,
