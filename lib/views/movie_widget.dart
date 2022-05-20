@@ -33,20 +33,23 @@ Widget movieWidget({
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Image.network(
-                    errorBuilder: ((context, error, stackTrace) =>
-                        Image.network(
-                          "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
-                          height: 500,
-                          fit: BoxFit.contain,
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                        )),
-                    imageURL,
-                    height: 500,
-                    fit: BoxFit.contain,
-                    width: double.infinity,
-                    alignment: Alignment.center,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      errorBuilder: ((context, error, stackTrace) =>
+                          Image.network(
+                            "http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg",
+                            height: double.infinity,
+                            fit: BoxFit.contain,
+                            width: double.infinity,
+                            alignment: Alignment.topCenter,
+                          )),
+                      imageURL,
+                      height: 450,
+                      fit: BoxFit.contain,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.all(15),

@@ -86,12 +86,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     errorBuilder: ((context, error, stackTrace) =>
                         Image.network(
                           "https://www.fabricocina.com/wp-content/uploads/2018/06/image_large.png",
-                          height: 800,
+                          height: 500,
                           fit: BoxFit.fill,
                           width: double.infinity,
                           alignment: Alignment.center,
                         )),
-                    height: 800,
+                    height: 500,
                     fit: BoxFit.contain,
                     width: double.infinity,
                     alignment: Alignment.center,
