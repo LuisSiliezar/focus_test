@@ -42,8 +42,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
         });
       }
 
-      // print(moviesList);
-
       return relatedMovies;
     } else {
       // print('Request failed with status: ${response.statusCode}.');

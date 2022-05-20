@@ -28,7 +28,7 @@ class _SearchResultState extends State<SearchResult> {
     if (response.statusCode == 200) {
       var jsonResponse =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
-      print(jsonResponse);
+      //   print(jsonResponse);
       var movie = Movie.fromJson(jsonResponse);
       for (var i in movie.results) {
         // moviesList.add(i);
@@ -38,7 +38,7 @@ class _SearchResultState extends State<SearchResult> {
         });
       }
 
-      print(response.body);
+      //  print(response.body);
       if (searchResults.isEmpty) {
         setState(() {
           _isEmpty = true;
@@ -83,7 +83,7 @@ class _SearchResultState extends State<SearchResult> {
       ),
       body: _isLoading == true
           ? Center(
-              child: Container(
+              child: SizedBox(
                 height: 300,
                 width: 300,
                 child: Lottie.asset('assets/dog_loader.json'),
