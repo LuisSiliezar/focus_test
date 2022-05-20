@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 40),
                 //Button
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 60,
                   child: Material(
@@ -143,22 +143,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .showSnackBar(const SnackBar(
                               content: Text('Please Enter your Credentials'),
                             ));
-                            print("Please enter your Credentials");
+                            // print("Please enter your Credentials");
                           } else if (emailTextbox.text.isEmpty) {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text('Email is empty'),
                             ));
-                            print("Email is empty");
+                            // print("Email is empty");
                           } else if (passwordTextbox.text.isEmpty) {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text('Password is empty'),
                             ));
-                            print("Password is empty");
+                            // print("Password is empty");
                           } else {
-                            print(passwordTextbox.text);
-                            print(emailTextbox.text);
+                            // print(passwordTextbox.text);
+                            // print(emailTextbox.text);
                             final email = emailTextbox.text;
                             final password = passwordTextbox.text;
                             authServices.getToken(
@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 100),
+                const SizedBox(height: 100),
               ],
             ),
           ),

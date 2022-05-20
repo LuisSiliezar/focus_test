@@ -36,12 +36,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
         });
       }
       if (relatedMovies.isEmpty) {
-        _isEmpty = true;
+        setState(() {
+          _isEmpty = true;
+          _isLoading = false;
+        });
       }
+
       // print(moviesList);
+
       return relatedMovies;
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      // print('Request failed with status: ${response.statusCode}.');
       throw Exception("NO DATA");
     }
   }
@@ -79,9 +84,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 children: [
                   //  IMAGE
                   Image.network(
-                    "https://images.pexels.com/photos/9887601/pexels-photo-9887601.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                    height: 700,
-                    fit: BoxFit.cover,
+                    "https://image.tmdb.org/t/p/w500/${widget.movie.posterPath}",
+                    height: 800,
+                    fit: BoxFit.contain,
                     width: double.infinity,
                     alignment: Alignment.center,
                   ),
@@ -96,16 +101,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0),
                           child: Text(
-                            "${widget.movie.originalTitle}",
-                            style: TextStyle(
+                            widget.movie.originalTitle,
+                            style: const TextStyle(
                                 color: Colors.blue,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
                         Text(
-                          "${widget.movie.releaseDate}",
-                          style: TextStyle(
+                          widget.movie.releaseDate,
+                          style: const TextStyle(
                               color: Colors.black87,
                               fontSize: 12,
                               fontWeight: FontWeight.bold),
@@ -113,13 +118,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Text(
-                            "${widget.movie.overview}",
-                            style: TextStyle(color: Colors.black87),
+                            widget.movie.overview,
+                            style: const TextStyle(color: Colors.black87),
                           ),
                         ),
                         Text(
                           "Average vote: ${widget.movie.voteAverage.toString()}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.black87,
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
@@ -130,8 +135,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(0, 25, 0, 10),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -155,90 +160,107 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                       ),
                     )
-                  : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Container(
-                              height: 125,
-                              width: 800,
-                              child: ListView.builder(
-                                itemCount: relatedMovies.length,
+                  : _isEmpty == true
+                      ? Center(
+                          child: SizedBox(
+                            height: 300,
+                            width: 300,
+                            child: Lottie.asset('assets/empty_state.json'),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => DetailsScreen(
-                                                movie: relatedMovies[index]),
-                                          ));
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.only(right: 25),
-                                      width: 400,
-                                      child: Card(
-                                        elevation: 2,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                child: Image.network(
-                                                  "https://images.pexels.com/photos/9887601/pexels-photo-9887601.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                                                  height: 100,
-                                                  width: 100,
-                                                  fit: BoxFit.cover,
-                                                  alignment: Alignment.center,
-                                                ),
-                                              ),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                child: SizedBox(
+                                  height: 125,
+                                  width: 800,
+                                  child: ListView.builder(
+                                    itemCount: relatedMovies.length,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailsScreen(
+                                                        movie: relatedMovies[
+                                                            index]),
+                                              ));
+                                        },
+                                        child: Container(
+                                          padding:
+                                              const EdgeInsets.only(right: 25),
+                                          width: 400,
+                                          child: Card(
+                                            elevation: 2,
+                                            child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                                  MainAxisAlignment.start,
                                               children: [
-                                                Container(
-                                                  width: 250,
-                                                  child: Text(
-                                                    "${relatedMovies[index].originalTitle}",
-                                                    style: TextStyle(
-                                                        color: Colors.blue,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    child: Image.network(
+                                                      "https://image.tmdb.org/t/p/w500/${relatedMovies[index].posterPath}",
+                                                      height: 100,
+                                                      width: 100,
+                                                      fit: BoxFit.contain,
+                                                      alignment:
+                                                          Alignment.center,
+                                                    ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  "${relatedMovies[index].releaseDate}",
-                                                  style: TextStyle(
-                                                      color: Colors.black87,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 250,
+                                                      child: Text(
+                                                        relatedMovies[index]
+                                                            .originalTitle,
+                                                        style: const TextStyle(
+                                                            color: Colors.blue,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      relatedMovies[index]
+                                                          .releaseDate,
+                                                      style: const TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                )
                                               ],
-                                            )
-                                          ],
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            )),
-                      ),
-                    ),
+                                      );
+                                    },
+                                  ),
+                                )),
+                          ),
+                        ),
             ],
           ),
         ),

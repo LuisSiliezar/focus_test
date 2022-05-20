@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:test_app/models/movie_model.dart';
 import 'package:test_app/views/details.dart';
 
@@ -37,7 +36,7 @@ Widget movieWidget({
                   Image.network(
                     imageURL,
                     height: 500,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                     width: double.infinity,
                     alignment: Alignment.center,
                   ),

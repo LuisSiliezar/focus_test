@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Results> movies = [];
   List<String> posters = [];
   bool _isLoading = true;
+
   //GET MOVIES
   getPopularMovies() async {
     var url = Uri.https('api.themoviedb.org', '/3/movie/popular',
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // print(moviesList);
       return movies;
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      // print('Request failed with status: ${response.statusCode}.');
       throw Exception("NO DATA");
     }
   }
@@ -60,14 +61,21 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white70,
         title: TextFormField(
           controller: searchbox,
-          onFieldSubmitted: (value) {
+          onFieldSubmitted: (value) async {
             // print(value);
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      SearchResult(searchQuery: searchbox.text),
-                ));
+            if (searchbox.text.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text('Type something'),
+              ));
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        SearchResult(searchQuery: searchbox.text),
+                  ));
+              // searchbox.clear();
+            }
           },
           decoration: const InputDecoration(
             filled: true,
@@ -79,14 +87,21 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             color: Colors.blue,
             icon: const Icon(Icons.search),
-            onPressed: () {
+            onPressed: () async {
+              // searchbox.clear();
               // print(searchbox.text);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        SearchResult(searchQuery: searchbox.text),
-                  ));
+              if (searchbox.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Type something'),
+                ));
+              } else {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SearchResult(searchQuery: searchbox.text),
+                    ));
+              }
             },
           ),
         ],
@@ -108,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     context: context,
                     title: movies[index].originalTitle,
                     imageURL:
-                        "https://images.pexels.com/photos/9887601/pexels-photo-9887601.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                        "https://image.tmdb.org/t/p/w500/${movies[index].posterPath}",
                     releaseDate: movies[index].releaseDate,
                     overview: movies[index].overview,
                     vote: movies[index].voteAverage.toString());

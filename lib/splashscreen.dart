@@ -19,13 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
       Future.delayed(const Duration(seconds: 5), () {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const LoginScreen()));
-        print("No token");
+        // print("No token");
       });
     } else {
       Future.delayed(const Duration(seconds: 5), () {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const HomeScreen()));
-        print(token);
+        // print(token);
       });
     }
   }
